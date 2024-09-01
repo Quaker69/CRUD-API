@@ -4,11 +4,13 @@ import json
 
 
 
-def insert_into_db(name, address):
+
+
+def insert_into_db(user_db,password_db, name, address):
     try:
         conn=mariadb.connect(
-                user="user1",
-                password="impact2001",
+                user=user_db,
+                password=password_db,
                 port=3306,
                 database="python_db"
         )
@@ -22,7 +24,7 @@ def insert_into_db(name, address):
     try:
         cur.execute("create table customer(id int auto_increment primary key, name varchar(255), address varchar(255)) ")
     except mariadb.Error as e:
-        print(e)
+        pass
 
     try:
 

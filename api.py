@@ -3,7 +3,12 @@ from typing import Union
 import random as rand
 from pydantic import BaseModel
 from mariadb_test import *
+import json
 
+f = open('db_creds.json')
+creds= json.load(f)
+user=creds['user']
+password=creds['password']
 
 app= FastAPI()
 
@@ -21,7 +26,7 @@ def root_route():
 async def get_post_data(data: Item):
     name= data.name
     address= data.address
-    flag= insert_into_db(name,address)
+    flag= insert_into_db(user,password,name,address)
     if flag==True:
         return {
             "msg": "yeaboi",
