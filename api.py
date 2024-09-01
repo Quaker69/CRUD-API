@@ -23,7 +23,7 @@ def root_route():
 
 
 @app.post("/post/")
-async def get_post_data(data: Item):
+async def post_data(data: Item):
     name= data.name
     address= data.address
     flag= insert_into_db(user,password,name,address)
@@ -35,6 +35,12 @@ async def get_post_data(data: Item):
         return{
             "msg":"badboi",
         }
+    
+@app.get("/get_data/{id_num}")
+async def fetch_data(id_num):
+    return get_data(user,password,id_num)
+
+
 
 
 

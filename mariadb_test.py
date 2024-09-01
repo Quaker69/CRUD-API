@@ -39,4 +39,38 @@ def insert_into_db(user_db,password_db, name, address):
 
 
 
+def get_data(user_db,password_db, id_num):
+    try:
+        conn=mariadb.connect(
+                user=user_db,
+                password=password_db,
+                port=3306,
+                database="python_db"
+        )
+    except mariadb.Error as e:
+        print(f"Error connecting to maria-db: {e}")
+        sys.exit(1)
+
+
+    cur= conn.cursor()
+
+    try:
+        cur.execute("create table customer(id int auto_increment primary key, name varchar(255), address varchar(255)) ")
+    except mariadb.Error as e:
+        pass
+
+    try:
+
+        sql= "select name, address from customer where id ="+ id_num
+        cur.execute(sql)
+       
+        records= cur.fetchall()
+       
+
+    except mariadb.Error as e:
+        return False
+    return {"name":{records[0]}}
+
+
+
 
