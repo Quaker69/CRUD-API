@@ -16,7 +16,7 @@ def insert_into_db(user_db,password_db, name, address):
         )
     except mariadb.Error as e:
         print(f"Error connecting to maria-db: {e}")
-        sys.exit(1)
+        
 
 
     cur= conn.cursor()
@@ -49,7 +49,7 @@ def get_data(user_db,password_db, id_num):
         )
     except mariadb.Error as e:
         print(f"Error connecting to maria-db: {e}")
-        sys.exit(1)
+        
 
 
     cur= conn.cursor()
@@ -83,7 +83,7 @@ def update_database(user_db,password_db,id_num,name,address):
         )
     except mariadb.Error as e:
         print(f"Error connecting to maria-db: {e}")
-        sys.exit(1)
+        
 
 
     cur= conn.cursor()
@@ -108,5 +108,37 @@ def update_database(user_db,password_db,id_num,name,address):
     return True
 
 
+def delete_data(user_db,password_db, id_num):
+    try:
+        conn=mariadb.connect(
+                user=user_db,
+                password=password_db,
+                port=3306,
+                database="python_db"
+        )
+    except mariadb.Error as e:
+        print(f"Error connecting to maria-db: {e}")
+        
+
+
+    cur= conn.cursor()
+
+    try:
+        cur.execute("create table customer(id int auto_increment primary key, name varchar(255), address varchar(255)) ")
+    except mariadb.Error as e:
+        pass
+
+    try:
+
+        sql= "delete from customer where id ="+ id_num
+        cur.execute(sql)
+        conn.commit()
+   
+       
+
+    except mariadb.Error as e:
+        print(e)
+        return False
+    return True
 
 

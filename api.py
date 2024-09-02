@@ -61,7 +61,16 @@ async def update_data(data:Item_update):
             "msg":"badboi",
         }
 
-
-
+@app.get("/delete_data/{id_num}")
+async def delete_data_from_db(id_num):   
+    flag= delete_data(user,password,id_num)
+    if flag==True:
+        return {
+            "msg": "yeaboi updated",
+        }
+    else:
+        return{
+            "msg":"badboi",
+        }
 
 
