@@ -68,8 +68,44 @@ def get_data(user_db,password_db, id_num):
        
 
     except mariadb.Error as e:
+        print(e)
         return False
     return {"name":{records[0]}}
+
+
+def update_database(user_db,password_db,id_num,name,address):
+    try:
+        conn=mariadb.connect(
+                user=user_db,
+                password=password_db,
+                port=3306,
+                database="python_db"
+        )
+    except mariadb.Error as e:
+        print(f"Error connecting to maria-db: {e}")
+        sys.exit(1)
+
+
+    cur= conn.cursor()
+
+    try:
+        cur.execute("create table customer(id int auto_increment primary key, name varchar(255), address varchar(255)) ")
+    except mariadb.Error as e:
+        pass
+
+    try:
+        sql= f"update customer set name='{name}',address='{address}' where id = {id_num}"
+        print(sql)
+        cur.execute(sql)
+        conn.commit()
+        print('dine')
+
+       
+
+    except mariadb.Error as e:
+        print(e)
+        return False
+    return True
 
 
 

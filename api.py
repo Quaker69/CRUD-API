@@ -15,6 +15,11 @@ app= FastAPI()
 class Item(BaseModel):
     name: str
     address: str
+class Item_update(BaseModel):
+    id: int
+    name: str
+    address: str
+
 
 @app.get("/")
 def root_route():
@@ -37,8 +42,24 @@ async def post_data(data: Item):
         }
     
 @app.get("/get_data/{id_num}")
-async def fetch_data(id_num):
+async def fetch_data(id_num):   
     return get_data(user,password,id_num)
+
+
+@app.post("/update/")
+async def update_data(data:Item_update):
+    name= data.name
+    address= data.address
+    id_ref= data.id
+    flag= update_database(user, password,id_ref,name , address)
+    if flag==True:
+        return {
+            "msg": "yeaboi updated",
+        }
+    else:
+        return{
+            "msg":"badboi",
+        }
 
 
 
