@@ -13,4 +13,23 @@ The union and connectivity between **"FastAPI"** and **"MariaDB"** . Below is an
 
 *table 1: atomic **API CRUD** operations.*
 
-## API Endpoints
+## Endpoints
+
+![alt text](https://github.com/Quaker69/CRUD-API/blob/master/md_contents/api_swagger.png)
+*swagger UI*
+
+## Instructions 
+- Install FastAPI, mariadb pip packages.
+- create a db_creds.json.
+```json
+{
+    "user":"<username>",
+    "password":"<password>"
+}
+```
+
+
+
+
+
+
