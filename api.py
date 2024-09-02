@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from typing import Union
 import random as rand
 from pydantic import BaseModel
-from mariadb_test import *
+from mariadb_conn import *
 import json
 
 f = open('db_creds.json')
