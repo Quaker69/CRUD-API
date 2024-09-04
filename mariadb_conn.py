@@ -95,10 +95,10 @@ def update_database(user_db,password_db,id_num,name,address):
 
     try:
         sql= f"update customer set name='{name}',address='{address}' where id = {id_num}"
-        print(sql)
+        
         cur.execute(sql)
         conn.commit()
-        print('dine')
+        
 
        
 
